@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Portfolio - Ahmedali</title>
+<style>
+  body { font-family: Arial, sans-serif; text-align: center; padding: 20px; margin: 0; background: black; overflow-x: hidden; }
+  canvas { position: fixed; top: 0; left: 0; z-index: -1; }
+  .content { position: relative; z-index: 1; }
+  h1 { color: #000000; font-size: 28px; margin-top: 20px; }
+  p { color: #222; font-size: 18px; line-height: 1.6; }
+  img.profile {
+    width: 150px; height: 150px;
+    border-radius: 50%; object-fit: cover;
+    border: 4px solid #51F90B;
+    background: #333; /* shows if image fails */
+    display: block; margin: 0 auto;
+  }
+  .card { background: hsla(80, 88%, 27%, 0.92); max-width: 500px; margin: 20px auto; padding: 25px; border-radius: 15px; border: 2px solid #68E21F; box-shadow: 0 0 20px #00ff8866; }
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<div class="content">
+  <div class="card">
+    <h1>My Portfolio</h1>
+    <!-- FIXED: added class and onerror check -->
+    <img class="profile" src="profile.jpg" alt="My Profile Picture" onerror="this.src='https://via.placeholder.com/150?text=Add+profile.jpg'">
+    <h1>Hello, I'm Ahmedali!</h1>
+    <p>I am an Information Technology student. I love programming and web development.</p>
+  </div>
+  <div class="card"><h1>About Me</h1><p>I enjoy learning new technologies and creating simple websites.</p></div>
+  <div class="card"><h1>My Skills</h1><p>HTML | CSS | JavaScript | C++</p></div>
+  <div class="card"><h1>My Projects</h1><p>Personal Portfolio Website</p></div>
+  <div class="card"><h1>Contact Me</h1><p>Email: bravofoxtrot911@gmail.com</p></div>
+  <div class="card"><h1>Personal info</h1><p>Ahmedali Gulam Hassan</p><p>Panabuan Indanan Sulu</p><p>Male</p></div>
+</div>
+<script>
+  var c=document.getElementById('bg'), ctx=c.getContext('2d');
+  c.height=window.innerHeight; c.width=window.innerWidth;
+  var chars="01".split(""); var font_size=14;
+  var columns=c.width/font_size; var drops=[];
+  for(var x=0;x<columns;x++) drops[x]=1;
+  function draw(){
+    ctx.fillStyle="rgba(0,0,0,0.08)"; ctx.fillRect(0,0,c.width,c.height);
+    ctx.fillStyle="#00ff88"; ctx.font=font_size+"px monospace";
+    for(var i=0;i<drops.length;i++){
+      var txt=chars[Math.floor(Math.random()*chars.length)];
+      ctx.fillText(txt,i*font_size,drops[i]*font_size);
+      if(drops[i]*font_size>c.height && Math.random()>0.975) drops[i]=0; drops[i]++;
+    }
+  }
+  setInterval(draw,35);
+  window.onresize=function(){ c.height=innerHeight; c.width=innerWidth; }
+</script>
+</body>
+</html>
